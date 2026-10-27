@@ -273,8 +273,8 @@ def render_sidebar() -> Tuple[Optional[pd.DataFrame], Optional[pd.DataFrame], Di
 
             if cur_file.exists() and ref_file.exists():
                 try:
-                    current_df = read_csv_bytes(cur_file.read_bytes(), filename="current.csv")
-                    reference_df = read_csv_bytes(ref_file.read_bytes(), filename="baseline.csv")
+                    current_df = read_csv_bytes(cur_file.read_bytes())
+                    reference_df = read_csv_bytes(ref_file.read_bytes())
                     st.success("✅ Demo benchmark loaded (508 current rows, 500 baseline rows).")
                 except Exception as e:
                     st.error(f"Failed to read demo benchmark files: {e}")
@@ -299,9 +299,9 @@ def render_sidebar() -> Tuple[Optional[pd.DataFrame], Optional[pd.DataFrame], Di
                 if cur_name.lower().endswith(".xlsx"):
                     sheets = list_excel_sheets(cur_bytes)
                     cur_sheet = st.selectbox("Select Target Worksheet", sheets, key="cur_sheet_sel")
-                    current_df = read_excel_bytes(cur_bytes, filename=cur_name, sheet_name=cur_sheet)
+                    current_df = read_excel_bytes(cur_bytes, sheet_name=cur_sheet)
                 else:
-                    current_df = read_csv_bytes(cur_bytes, filename=cur_name)
+                    current_df = read_csv_bytes(cur_bytes)
 
             st.markdown("### 2. Baseline Dataset (Optional)")
             st.caption("Required for distribution and schema drift monitoring.")
@@ -316,9 +316,9 @@ def render_sidebar() -> Tuple[Optional[pd.DataFrame], Optional[pd.DataFrame], Di
                 if ref_name.lower().endswith(".xlsx"):
                     r_sheets = list_excel_sheets(ref_bytes)
                     ref_sheet = st.selectbox("Select Baseline Worksheet", r_sheets, key="ref_sheet_sel")
-                    reference_df = read_excel_bytes(ref_bytes, filename=ref_name, sheet_name=ref_sheet)
+                    reference_df = read_excel_bytes(ref_bytes, sheet_name=ref_sheet)
                 else:
-                    reference_df = read_csv_bytes(ref_bytes, filename=ref_name)
+                    reference_df = read_csv_bytes(ref_bytes)
             else:
                 ref_name = None
 

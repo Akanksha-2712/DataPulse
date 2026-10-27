@@ -136,6 +136,7 @@ def read_csv_bytes(
     file_source: Union[bytes, io.BytesIO],
     delimiter: str | None = None,
     encoding: str | None = None,
+    filename: str | None = None,
 ) -> pd.DataFrame:
     """Read a CSV file from in-memory bytes into a Pandas DataFrame.
 
@@ -219,6 +220,7 @@ def read_csv_bytes(
 def read_excel_bytes(
     file_source: Union[bytes, io.BytesIO],
     sheet_name: str | int | None = None,
+    filename: str | None = None,
 ) -> pd.DataFrame:
     """Read an Excel (.xlsx) file from in-memory bytes using openpyxl engine.
 
