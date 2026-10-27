@@ -1,0 +1,84 @@
+{
+  "dataset_domain": "Customer Transactions & Financial Profile",
+  "version": "1.0.0",
+  "rules": {
+    "customer_id": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "nullable": false
+    },
+    "age": {
+      "type": "int",
+      "required": true,
+      "nullable": false,
+      "min_value": 18,
+      "max_value": 100
+    },
+    "annual_income": {
+      "type": "float",
+      "required": true,
+      "nullable": false,
+      "min_value": 0.0,
+      "max_value": 10000000.0
+    },
+    "credit_score": {
+      "type": "int",
+      "required": true,
+      "nullable": false,
+      "min_value": 300,
+      "max_value": 850
+    },
+    "transaction_amount": {
+      "type": "float",
+      "required": true,
+      "nullable": false,
+      "min_value": 0.0,
+      "max_value": 500000.0
+    },
+    "debt_to_income": {
+      "type": "float",
+      "required": false,
+      "nullable": true,
+      "min_value": 0.0,
+      "max_value": 1.5
+    },
+    "category": {
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "allowed_values": [
+        "Retail",
+        "Travel",
+        "Groceries",
+        "Electronics",
+        "Entertainment",
+        "Utilities"
+      ]
+    },
+    "account_type": {
+      "type": "string",
+      "required": true,
+      "nullable": false,
+      "allowed_values": [
+        "Standard",
+        "Premium",
+        "Business"
+      ]
+    }
+  },
+  "quality_score_weights": {
+    "completeness": 40.0,
+    "uniqueness": 25.0,
+    "validity": 35.0
+  },
+  "drift_thresholds": {
+    "p_value_alpha": 0.05,
+    "wasserstein_threshold": 0.1
+  },
+  "anomaly_detection": {
+    "algorithm": "IsolationForest",
+    "default_contamination": 0.05,
+    "random_state": 42
+  }
+}

@@ -1,0 +1,37 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# User Uploads & Temporary Scratch Files
+# (Demo datasets in data/demo/ are tracked)
+data/uploads/
+data/temp/
+*.tmp
+*.temp
+
+# Generated Audit Reports and Exports
+reports/*.pdf
+reports/*.xlsx
+reports/*.csv
+reports/temp/
+
+# IDE & OS Metadata
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Application Cache
+.streamlit/cache/
+.evidently/
