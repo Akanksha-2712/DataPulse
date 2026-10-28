@@ -1003,16 +1003,27 @@ def render_quality_audit_page() -> None:
     st.markdown("---")
 
     # Executive Scoreboard
+    # dqs.dimensions values are DimensionScore objects — extract .score (float or None)
+    def _dim_score(dqs, key: str) -> float:
+        """Safely extract numeric score from a DimensionScore object or fallback."""
+        dim = dqs.dimensions.get(key)
+        if dim is None:
+            return 0.0
+        if hasattr(dim, "score"):
+            return float(dim.score) if dim.score is not None else 0.0
+        return float(dim) if dim is not None else 0.0
+
     sc1, sc2, sc3, sc4 = st.columns(4)
     with sc1:
         st.metric("Composite DQS", f"{dqs.composite_score:.1f} / 100", f"Grade: {dqs.grade.upper()}")
     with sc2:
-        st.metric("Completeness Score", f"{dqs.dimensions.get('completeness', 0):.1f}%", f"{profile.missing_cells} null cells")
+        st.metric("Completeness Score", f"{_dim_score(dqs, 'completeness'):.1f}%", f"{profile.missing_cells} null cells")
     with sc3:
-        st.metric("Uniqueness Score", f"{dqs.dimensions.get('uniqueness', 0):.1f}%", f"{profile.duplicate_rows} duplicate rows")
+        st.metric("Uniqueness Score", f"{_dim_score(dqs, 'uniqueness'):.1f}%", f"{profile.duplicate_rows} duplicate rows")
     with sc4:
-        v_score = dqs.dimensions.get("validity")
-        v_str = f"{v_score:.1f}%" if v_score is not None else "N/A"
+        v_dim = dqs.dimensions.get("validity")
+        v_val = (float(v_dim.score) if hasattr(v_dim, "score") and v_dim.score is not None else None) if v_dim is not None else None
+        v_str = f"{v_val:.1f}%" if v_val is not None else "N/A"
         st.metric("Validity Score", v_str, f"{val.total_issues} rule issues")
 
     # DQS Formula Callout
