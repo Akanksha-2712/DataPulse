@@ -36,6 +36,21 @@ class SchemaDiffResult:
     common_columns: List[str]                   # In both reference and current
     has_schema_changes: bool
 
+    @property
+    def schema_has_drift(self) -> bool:
+        """Alias for has_schema_changes."""
+        return self.has_schema_changes
+
+    @property
+    def new_columns(self) -> List[str]:
+        """Alias for added_columns."""
+        return self.added_columns
+
+    @property
+    def type_mismatches(self) -> Dict[str, Dict[str, str]]:
+        """Alias for type_changes."""
+        return self.type_changes
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert schema diff to dictionary."""
         return asdict(self)
