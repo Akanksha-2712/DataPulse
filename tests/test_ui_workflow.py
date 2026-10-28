@@ -1,4 +1,4 @@
-"""Workflow and state management tests for DataSentry.
+"""Workflow and state management tests for DataPulse.
 
 Tests verify:
 1. Session state lifecycle, default initialization, and safe transitions.
@@ -142,7 +142,7 @@ def test_reports_generation_end_to_end() -> None:
     meta = ReportMetadata(
         dataset_name="target_test.csv",
         reference_name="baseline_test.csv",
-        author="DataSentry Test Suite",
+        author="DataPulse Test Suite",
     )
 
     # 1. PDF Generation

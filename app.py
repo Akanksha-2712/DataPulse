@@ -1,13 +1,10 @@
-"""DataSentry — Intelligent Data Quality Monitoring and Anomaly Detection System.
+"""DataPulse — Keep Your Data Clean. Reliable. Ready.
 
-A polished, interactive, professional data-quality monitoring dashboard:
-1. Application Identity: DataSentry with deep navy and restrained teal styling.
-2. Ingestion Hub: Ingest custom datasets (CSV/XLSX) or load synthetic benchmark data.
-3. Declarative Schema Validation: Pandera-driven syntactic and semantic constraints.
-4. Explainable Quality Scoring: Composite Data Quality Score (DQS) in [0, 100].
-5. Distribution Drift Monitoring: Kolmogorov-Smirnov continuous & Chi-Square categorical tests.
-6. Multivariate Anomaly Detection: Scikit-learn Isolation Forest with continuous suspicion scores.
-7. Enterprise Multi-Format Export: In-memory openpyxl Excel, ReportLab Platypus PDF, and raw CSV.
+An intelligent data quality monitoring tool that helps you understand, validate,
+and improve your data. Upload your dataset to detect missing values, duplicates,
+data inconsistencies, drift, and unusual patterns—all through a simple, interactive dashboard.
+
+Your data. Our insights. Better decisions.
 
 100% In-Memory Local Execution with Zero Disk Persistence.
 """
@@ -67,8 +64,8 @@ from src.validation import ValidationResult, load_validation_rules, validate_dat
 # ==============================================================================
 
 st.set_page_config(
-    page_title="DataSentry — Data Quality & Anomaly Detection",
-    page_icon="🛡️",
+    page_title="DataPulse — Keep Your Data Clean. Reliable. Ready.",
+    page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -79,7 +76,7 @@ st.set_page_config(
 # ==============================================================================
 
 def get_application_css() -> str:
-    """Return polished, professional CSS for the DataSentry interface.
+    """Return polished, professional CSS for the DataPulse interface.
 
     Palette:
     - Background: Crisp off-white (#F8FAFC)
@@ -415,8 +412,8 @@ def run_analysis_pipeline(
     reference_name: Optional[str] = None,
     current_sheet: Optional[str] = None,
     reference_sheet: Optional[str] = None,
-    app_title: str = "DataSentry",
-    app_subtitle: str = "Data Quality Monitoring and Anomaly Detection System",
+    app_title: str = "DataPulse",
+    app_subtitle: str = "Keep Your Data Clean. Reliable. Ready.",
 ) -> Dict[str, Any]:
     """Execute the end-to-end analytical workflow across all modules.
 
@@ -473,7 +470,7 @@ def run_analysis_pipeline(
 # ==============================================================================
 
 def render_application_header() -> None:
-    """Render the application header with DataSentry branding and real-time state badge."""
+    """Render the application header with DataPulse branding and real-time state badge."""
     current_df = st.session_state["current_df"]
     dqs: Optional[QualityScorecard] = st.session_state["quality_scorecard"]
     c_meta = st.session_state["current_meta"]
@@ -496,12 +493,20 @@ def render_application_header() -> None:
         <div class="sentry-header">
             <div class="sentry-header-row">
                 <div>
-                    <div class="sentry-brand">🛡️ DataSentry</div>
-                    <div class="sentry-subtitle">
-                        Intelligent Tabular Data Quality Monitoring, Pandera Schema Validation & Anomaly Detection
+                    <div class="sentry-brand">⚡ DataPulse</div>
+                    <div style="font-weight: 700; color: #5EEAD4; margin-top: 3px; font-size: 1.05rem; letter-spacing: -0.2px;">
+                        Keep Your Data Clean. Reliable. Ready.
+                    </div>
+                    <div class="sentry-subtitle" style="max-width: 950px; margin-top: 6px; line-height: 1.5; color: #CBD5E1;">
+                        DataPulse is an intelligent data quality monitoring tool that helps you understand, validate, 
+                        and improve your data. Upload your dataset to detect missing values, duplicates, data inconsistencies, 
+                        drift, and unusual patterns—all through a simple, interactive dashboard.
+                    </div>
+                    <div style="font-weight: 700; color: #F8FAFC; margin-top: 6px; font-size: 0.92rem;">
+                        Your data. Our insights. Better decisions.
                     </div>
                 </div>
-                <div>{badge_html}</div>
+                <div style="align-self: flex-start;">{badge_html}</div>
             </div>
         </div>
         """,
@@ -516,8 +521,8 @@ def render_application_header() -> None:
 def render_sidebar_navigation() -> str:
     """Render the sidebar navigation, ingestion telemetry, and reset control."""
     with st.sidebar:
-        st.markdown("### 🛡️ **DataSentry**")
-        st.caption("Data Quality & Observability Platform")
+        st.markdown("### ⚡ **DataPulse**")
+        st.caption("Keep Your Data Clean. Reliable. Ready.")
 
         st.markdown("---")
 
@@ -611,11 +616,20 @@ def render_overview_page() -> None:
         st.markdown(
             """
             <div class="sentry-callout sentry-callout-info">
-                <h3 style="margin-top:0; color:#0F766E;">👋 Welcome to DataSentry</h3>
-                <p>
-                    DataSentry is an end-to-end data quality observability engine designed to audit, validate, 
-                    and detect anomalies across tabular datasets through three complementary layers:
+                <h3 style="margin-top:0; color:#0F766E;">⚡ Welcome to DataPulse</h3>
+                <p style="font-size: 1.05rem; font-weight: 700; color: #0D9488; margin-bottom: 6px;">
+                    Keep Your Data Clean. Reliable. Ready.
                 </p>
+                <p style="font-size: 0.96rem; line-height: 1.6; color: #1E293B;">
+                    DataPulse is an intelligent data quality monitoring tool that helps you understand, validate, 
+                    and improve your data. Upload your dataset to detect missing values, duplicates, data inconsistencies, 
+                    drift, and unusual patterns—all through a simple, interactive dashboard.
+                </p>
+                <p style="font-weight: 700; color: #0F766E; margin-bottom: 14px; font-size: 0.95rem;">
+                    Your data. Our insights. Better decisions.
+                </p>
+                <hr style="border: 0; border-top: 1px solid #CCFBF1; margin: 12px 0;">
+                <p style="font-weight: 600; color: #334155; margin-bottom: 6px;">Key Observability Layers:</p>
                 <ol style="margin-bottom:8px;">
                     <li><b>Deterministic Syntactic & Schema Checks:</b> Catches missingness, duplicates, and rule violations using <b>Pandera</b>.</li>
                     <li><b>Statistical Distribution Drift:</b> Measures covariate shift against historical baselines using <b>Kolmogorov-Smirnov</b> and <b>Chi-Square</b> tests.</li>
@@ -1413,8 +1427,8 @@ def render_reports_page() -> None:
         reference_name=r_meta["name"],
         worksheet_name=c_meta["sheet"],
         reference_worksheet_name=r_meta["sheet"],
-        author="DataSentry",
-        academic_context="Automated Data Quality Monitoring & Anomaly Detection System",
+        author="DataPulse",
+        academic_context="Keep Your Data Clean. Reliable. Ready. | Data Quality & Anomaly Detection System",
     )
 
     st.markdown("---")
@@ -1433,7 +1447,7 @@ def render_reports_page() -> None:
             st.download_button(
                 label="⬇️ Download PDF Audit Report",
                 data=pdf_bytes,
-                file_name=f"DataSentry_Audit_Report_{c_meta['name']}.pdf",
+                file_name=f"DataPulse_Audit_Report_{c_meta['name']}.pdf",
                 mime="application/pdf",
                 type="primary",
                 use_container_width=True,
@@ -1453,7 +1467,7 @@ def render_reports_page() -> None:
             st.download_button(
                 label="⬇️ Download Excel Workbook (.xlsx)",
                 data=excel_bytes,
-                file_name=f"DataSentry_Audit_Workbook_{c_meta['name']}.xlsx",
+                file_name=f"DataPulse_Audit_Workbook_{c_meta['name']}.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 type="primary",
                 use_container_width=True,
