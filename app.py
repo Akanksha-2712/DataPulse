@@ -1,14 +1,16 @@
 """Data Quality Monitoring and Anomaly Detection System — Streamlit Web Application.
 
-A highly customizable, user-friendly, and production-ready academic dashboard featuring:
-1. Dynamic Personalization: Custom app name, custom logo icon, and multi-theme color palettes.
-2. Multi-Format Ingestion: CSV and XLSX upload with worksheet discovery and one-click demo benchmarking.
-3. Data Profiling & Structural Health: Missing cells, duplicate records, data types, memory footprint.
-4. Declarative Schema Validation: Pandera-driven constraints (nulls, ranges, allowed categories).
-5. Transparent Quality Scoring: Explainable DQS indicator with normalized dimensional weighting.
-6. Distribution Drift Monitoring: Two-Sample Kolmogorov-Smirnov test and Pearson Chi-Square test.
-7. Unsupervised Anomaly Detection: Scikit-learn Isolation Forest with continuous suspicion scores.
-8. Multi-Format Report Center: In-memory download of styled openpyxl Excel workbooks, ReportLab PDFs, and CSV logs.
+A modern, highly user-friendly, and fully customizable academic data quality dashboard:
+1. Prominent Ingestion Hub: Upload custom datasets (CSV/XLSX) or trigger demo benchmarks directly on the main screen.
+2. Rich Brand Identity Options: 16 technical, MLOps, and academic name presets + custom title text input.
+3. Expanded Logo / Icon Picker: 10 symbolic badges representing governance, AI, diagnostics, and reliability.
+4. Dynamic Color Theme Engine: 5 color palettes (Navy, Cyber Teal, Royal Indigo, Crimson, Carbon Gold).
+5. Data Profiling & Structural Health: Missing cells, duplicate records, data types, memory footprint.
+6. Declarative Schema Validation: Pandera-driven constraints (nulls, ranges, allowed categories).
+7. Transparent Quality Scoring: Explainable DQS indicator with normalized dimensional weighting.
+8. Distribution Drift Monitoring: Two-Sample Kolmogorov-Smirnov test and Pearson Chi-Square test.
+9. Unsupervised Anomaly Detection: Scikit-learn Isolation Forest with continuous suspicion scores.
+10. Multi-Format Report Center: In-memory download of styled openpyxl Excel workbooks, ReportLab PDFs, and CSV logs.
 
 Academic Persona:
 B.Tech Artificial Intelligence and Data Science Student Final Project & Viva Voce Defense.
@@ -73,8 +75,40 @@ st.set_page_config(
 
 
 # ==============================================================================
-# COLOR THEME PALETTES & DYNAMIC CSS GENERATOR
+# BRANDING & THEME PRESETS (Expanded Options)
 # ==============================================================================
+
+APP_NAME_PRESETS = [
+    "🛡️ DataSentinel AI (Intelligent Quality & Drift Guard)",
+    "⚡ QualiPulse Monitor (Real-Time Tabular Health Engine)",
+    "🌐 AegisData Observability (Enterprise MLOps Shield)",
+    "🔍 VeriData Studio (Scientific Tabular Diagnostics)",
+    "🦅 SentinelWatch AI (High-Vigilance Data Observability)",
+    "🧠 NeuralAudit MLOps (Autonomous Pipeline Validator)",
+    "💎 DataCortex Analyzer (Precision Schema & Drift Audit)",
+    "📊 PrismData Health (Multi-Dimensional Quality Suite)",
+    "🎯 OmniCheck Validator (Zero-Defect Pipeline Guard)",
+    "🧬 Synapse Data Guard (AI-Powered Anomaly Detector)",
+    "🔬 DeepAudit Tabular Lab (Academic Research Benchmark)",
+    "🌊 ClearStream DataOps (Continuous Tabular Verification)",
+    "✨ PureData Guardian (Deterministic & ML Quality Assurance)",
+    "🛡️ CyberDrift Inspector (Statistical Covariate Shift Monitor)",
+    "🎓 AutoData Quality Monitor (B.Tech Capstone Edition)",
+    "✏️ Custom Application Name (Type Your Own Title)",
+]
+
+LOGO_PRESETS = [
+    ("🛡️", "Shield — Security & Data Governance"),
+    ("⚡", "Lightning — High-Velocity Pulse & Observability"),
+    ("🦅", "Sentinel Eagle — Continuous Vigilance"),
+    ("💎", "Diamond — Precision Data Excellence"),
+    ("🔬", "Microscope — Deep Diagnostic Audit"),
+    ("🎯", "Target — Accurate Boundary Enforcement"),
+    ("🌐", "Globe — Enterprise Distributed Quality"),
+    ("🧠", "Neural Brain — AI-Powered Intelligence"),
+    ("🌊", "Stream Wave — Continuous Pipeline Flow"),
+    ("✨", "Sparkle — Pristine Clean Data"),
+]
 
 THEME_PALETTES = {
     "Midnight Navy & Steel Blue": {
@@ -114,28 +148,9 @@ THEME_PALETTES = {
     },
 }
 
-APP_NAME_PRESETS = [
-    "🛡️ DataSentinel AI",
-    "⚡ QualiPulse Monitor",
-    "🌐 AegisData Observability",
-    "🔍 VeriData Studio",
-    "🦅 SentinelWatch MLOps",
-    "✏️ Custom Application Name",
-]
-
-LOGO_PRESETS = [
-    ("🛡️", "Shield — Security & Data Governance"),
-    ("⚡", "Lightning — High-Velocity Pulse & Observability"),
-    ("🦅", "Sentinel Eagle — Continuous Vigilance"),
-    ("💎", "Diamond — Precision Data Excellence"),
-    ("🔬", "Microscope — Deep Diagnostic Audit"),
-    ("🎯", "Target — Accurate Boundary Enforcement"),
-    ("🌐", "Globe — Enterprise Distributed Quality"),
-]
-
 
 def generate_custom_css(theme: Dict[str, str]) -> str:
-    """Generate dynamic CSS styled according to the user's selected theme."""
+    """Generate dynamic CSS styled according to the selected theme."""
     return f"""
     <style>
         /* Card Aesthetics */
@@ -208,19 +223,41 @@ def generate_custom_css(theme: Dict[str, str]) -> str:
             color: white;
             padding: 24px 30px;
             border-radius: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }}
         .hero-title {{
-            font-size: 1.9rem;
+            font-size: 1.95rem;
             font-weight: 800;
             margin-bottom: 6px;
             letter-spacing: -0.3px;
         }}
         .hero-subtitle {{
-            font-size: 0.95rem;
+            font-size: 0.96rem;
             opacity: 0.92;
             line-height: 1.45;
+        }}
+
+        /* Ingestion Hub Card (Front & Center) */
+        .ingestion-card {{
+            background-color: #FFFFFF;
+            border: 1px solid {theme['card_border']};
+            border-top: 4px solid {theme['primary']};
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        }}
+        .ingestion-title {{
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: {theme['primary']};
+            margin-bottom: 4px;
+        }}
+        .ingestion-desc {{
+            font-size: 0.88rem;
+            color: #5A6B82;
+            margin-bottom: 14px;
         }}
 
         /* Viva Voce Callout Box */
@@ -241,17 +278,6 @@ def generate_custom_css(theme: Dict[str, str]) -> str:
             background-color: #F1F5F9;
             color: #334155;
             border: 1px solid #CBD5E1;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            margin-right: 6px;
-            display: inline-block;
-        }}
-        .step-pill-active {{
-            background-color: {theme['primary']};
-            color: white;
-            border: 1px solid {theme['primary']};
             padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.82rem;
@@ -351,55 +377,55 @@ def run_analysis_pipeline(
 
 
 # ==============================================================================
-# SIDEBAR: BRANDING, DATA INGESTION & PARAMETERS
+# SIDEBAR: BRANDING & ADVANCED HYPERPARAMETERS
 # ==============================================================================
 
-def render_sidebar() -> Tuple[Optional[pd.DataFrame], Optional[pd.DataFrame], Dict[str, Any]]:
-    """Render sidebar controls for branding, data ingestion, and hyperparameters."""
+def render_sidebar_controls() -> Dict[str, Any]:
+    """Render sidebar controls for application branding, logo, theme, and DQS weights."""
     with st.sidebar:
-        # ----------------------------------------------------------------------
-        # 1. APPLICATION BRANDING & PERSONALIZATION (User-Requested Feature)
-        # ----------------------------------------------------------------------
-        st.markdown("## 🎨 App Branding & Theme")
+        st.markdown("## 🎨 App Branding & Style")
 
+        # 1. Application Name Presets (Rich Options)
         preset_choice = st.selectbox(
-            "Application Name Preset",
+            "Application Identity Preset",
             APP_NAME_PRESETS,
             index=0,
-            help="Choose a pre-configured brand identity or customize your own title for your viva voce.",
+            help="Choose from curated MLOps, Data Science, and Academic project names, or enter your own.",
         )
 
-        if preset_choice == "✏️ Custom Application Name":
+        if "Custom Application Name" in preset_choice:
             app_title = st.text_input(
                 "Enter Custom Application Name",
                 value="Data Quality & Anomaly Detection System",
                 help="Type your preferred title, student name, or institution.",
             )
         else:
-            # Strip emoji prefix for clean text
-            app_title = preset_choice.split(" ", 1)[-1] if " " in preset_choice else preset_choice
+            # Extract clean name without emoji and parenthesis description
+            raw_title = preset_choice.split("(", 1)[0].strip()
+            app_title = raw_title.split(" ", 1)[-1] if " " in raw_title else raw_title
 
-        # Logo / Badge Picker
+        # 2. Logo / Icon Picker
         logo_options = [opt[0] for opt in LOGO_PRESETS]
         logo_labels = {opt[0]: f"{opt[0]} {opt[1]}" for opt in LOGO_PRESETS}
         selected_logo = st.selectbox(
-            "Select Logo / Icon",
+            "Select Logo / Icon Badge",
             logo_options,
             format_func=lambda x: logo_labels[x],
             index=0,
             help="Choose an icon representing your system's operational focus.",
         )
 
-        # Color Theme Palette Picker
+        # 3. Color Theme Palette Picker
         theme_names = list(THEME_PALETTES.keys())
         selected_theme_name = st.selectbox(
-            "Color Palette Theme",
+            "Color Theme Palette",
             theme_names,
             index=0,
-            help="Select a color scheme for the dashboard banner, metric cards, and chart accents.",
+            help="Customize the color palette for cards, banners, and interactive chart accents.",
         )
         selected_theme = THEME_PALETTES[selected_theme_name]
 
+        # 4. Custom Subtitle
         app_subtitle = st.text_input(
             "Subtitle / Academic Context",
             value="Automated Profiling, Pandera Schema Validation, Drift Monitoring & Isolation Forest | B.Tech AI & DS",
@@ -417,86 +443,8 @@ def render_sidebar() -> Tuple[Optional[pd.DataFrame], Optional[pd.DataFrame], Di
 
         st.markdown("---")
 
-        # ----------------------------------------------------------------------
-        # 2. DATASET INGESTION CONTROLS
-        # ----------------------------------------------------------------------
-        st.markdown("## 📂 Data Ingestion")
-
-        data_mode = st.radio(
-            "Select Data Source",
-            ["🚀 Load Synthetic Demo Benchmark", "📁 Upload My Datasets"],
-            help="Benchmark mode loads clean baseline and corrupted current datasets instantly.",
-        )
-
-        current_df = None
-        reference_df = None
-        cur_name = "current.csv"
-        ref_name = "baseline.csv"
-        cur_sheet = None
-        ref_sheet = None
-
-        if data_mode == "🚀 Load Synthetic Demo Benchmark":
-            demo_dir = PROJECT_ROOT / "data" / "demo"
-            cur_file = demo_dir / "current.csv"
-            ref_file = demo_dir / "baseline.csv"
-
-            if cur_file.exists() and ref_file.exists():
-                try:
-                    current_df = read_csv_bytes(cur_file.read_bytes())
-                    reference_df = read_csv_bytes(ref_file.read_bytes())
-                    st.success("✅ Demo Benchmark loaded (508 current rows, 500 baseline rows).")
-                except Exception as e:
-                    st.error(f"Failed to read demo benchmark files: {e}")
-            else:
-                st.warning("Demo files not found on disk. Generating dynamically...")
-                from src.synthetic_generator import generate_baseline_dataset, generate_current_dataset
-                reference_df = generate_baseline_dataset(500, seed=42)
-                current_df, _ = generate_current_dataset(500, seed=101)
-                st.success("✅ Synthetic benchmark generated successfully.")
-
-        else:
-            # Custom File Uploads
-            st.markdown("#### 1. Target Dataset (Required)")
-            cur_uploader = st.file_uploader(
-                "Upload Current Production Data (.csv, .xlsx)",
-                type=["csv", "xlsx"],
-                key="cur_upload",
-                help="Accepts CSV or modern Excel workbooks (.xlsx).",
-            )
-            if cur_uploader is not None:
-                cur_name = cur_uploader.name
-                cur_bytes = cur_uploader.getvalue()
-                if cur_name.lower().endswith(".xlsx"):
-                    sheets = list_excel_sheets(cur_bytes)
-                    cur_sheet = st.selectbox("Select Target Worksheet", sheets, key="cur_sheet_sel")
-                    current_df = read_excel_bytes(cur_bytes, sheet_name=cur_sheet)
-                else:
-                    current_df = read_csv_bytes(cur_bytes)
-
-            st.markdown("#### 2. Baseline Dataset (Optional)")
-            st.caption("Required for distribution and schema drift testing.")
-            ref_uploader = st.file_uploader(
-                "Upload Reference Baseline Data (.csv, .xlsx)",
-                type=["csv", "xlsx"],
-                key="ref_upload",
-                help="Historical or clean training batch to compare against.",
-            )
-            if ref_uploader is not None:
-                ref_name = ref_uploader.name
-                ref_bytes = ref_uploader.getvalue()
-                if ref_name.lower().endswith(".xlsx"):
-                    r_sheets = list_excel_sheets(ref_bytes)
-                    ref_sheet = st.selectbox("Select Baseline Worksheet", r_sheets, key="ref_sheet_sel")
-                    reference_df = read_excel_bytes(ref_bytes, sheet_name=ref_sheet)
-                else:
-                    reference_df = read_csv_bytes(ref_bytes)
-            else:
-                ref_name = None
-
-        # ----------------------------------------------------------------------
-        # 3. ADVANCED PARAMETERS & HYPERPARAMETERS
-        # ----------------------------------------------------------------------
-        with st.expander("⚙️ Analysis Parameters & DQS Weights", expanded=False):
+        # 5. Advanced Hyperparameters Expander
+        with st.expander("⚙️ Analysis Parameters & Weights", expanded=False):
             st.markdown("**Data Quality Score (DQS) Weights:**")
             w_comp = st.slider("Completeness Weight", 0, 100, 40, 5, help="Weight assigned to cell non-nullness.")
             w_uniq = st.slider("Uniqueness Weight", 0, 100, 25, 5, help="Weight assigned to row uniqueness.")
@@ -513,13 +461,13 @@ def render_sidebar() -> Tuple[Optional[pd.DataFrame], Optional[pd.DataFrame], Di
                 help="Estimated proportion of outliers in the dataset for Isolation Forest.",
             )
 
-        # Cache Reset Button
+        # 6. Cache Reset Button
         if st.button("🔄 Clear Cache & Re-run Analysis", use_container_width=True):
             for k in list(st.session_state.keys()):
                 del st.session_state[k]
             st.rerun()
 
-        params = {
+        return {
             "app_title": app_title,
             "selected_logo": selected_logo,
             "selected_theme": selected_theme,
@@ -527,46 +475,151 @@ def render_sidebar() -> Tuple[Optional[pd.DataFrame], Optional[pd.DataFrame], Di
             "weights": {"completeness": float(w_comp), "uniqueness": float(w_uniq), "validity": float(w_val)},
             "alpha": float(alpha),
             "contamination": float(contamination),
-            "current_name": cur_name,
-            "reference_name": ref_name,
-            "current_sheet": cur_sheet,
-            "reference_sheet": ref_sheet,
         }
 
-    return current_df, reference_df, params
-
 
 # ==============================================================================
-# MAIN PAGE RENDERING
+# FRONT-AND-CENTER DATASET INGESTION HUB (Main Screen Feature)
 # ==============================================================================
 
-def main() -> None:
-    """Main application lifecycle and view routing."""
-    # Render Sidebar and extract branding/parameters
-    current_df, reference_df, params = render_sidebar()
-
-    # Apply user-selected dynamic theme CSS
-    st.markdown(generate_custom_css(params["selected_theme"]), unsafe_allow_html=True)
-
-    # --------------------------------------------------------------------------
-    # TOP HERO BANNER (Drowsily customized by user)
-    # --------------------------------------------------------------------------
+def render_main_ingestion_hub(theme: Dict[str, str]) -> Tuple[Optional[pd.DataFrame], Optional[pd.DataFrame], Dict[str, Any]]:
+    """Render the primary data ingestion hub directly in front of the screen."""
     st.markdown(
         f"""
-        <div class="hero-banner">
-            <div class="hero-title">{params['selected_logo']} {params['app_title']}</div>
-            <div class="hero-subtitle">{params['app_subtitle']}</div>
+        <div class="ingestion-card">
+            <div class="ingestion-title">📥 Dataset Ingestion Hub</div>
+            <div class="ingestion-desc">
+                Select whether to run an instant benchmark audit using pre-configured synthetic data 
+                or upload your own custom tabular files (CSV or Excel XLSX).
+            </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-    # Quick Stepper Guide (User-Friendly Overview)
-    with st.expander("💡 Quick Navigation & Workflow Stepper (Click to expand)", expanded=False):
+    ingest_mode = st.radio(
+        "Choose Data Source Option",
+        [
+            "🚀 Instant Demo Benchmark (508 Target Rows vs 500 Baseline Rows with Controlled Injected Defects)",
+            "📁 Upload Custom Datasets (CSV or Excel .xlsx with Worksheet Selection)",
+        ],
+        index=0,
+        horizontal=False,
+    )
+
+    current_df = None
+    reference_df = None
+    cur_name = "current.csv"
+    ref_name = "baseline.csv"
+    cur_sheet = None
+    ref_sheet = None
+
+    if "Instant Demo Benchmark" in ingest_mode:
+        demo_dir = PROJECT_ROOT / "data" / "demo"
+        cur_file = demo_dir / "current.csv"
+        ref_file = demo_dir / "baseline.csv"
+
+        if cur_file.exists() and ref_file.exists():
+            try:
+                current_df = read_csv_bytes(cur_file.read_bytes())
+                reference_df = read_csv_bytes(ref_file.read_bytes())
+                st.success(
+                    "✅ **Active Benchmark Loaded:** 508 Target Records (`current.csv`) vs 500 Baseline Records (`baseline.csv`). "
+                    "Features controlled missingness (9.1%), duplicates (7.7%), boundary violations, continuous distribution shifts, and 8 planted multivariate anomalies."
+                )
+            except Exception as e:
+                st.error(f"Failed to read demo benchmark files: {e}")
+        else:
+            st.warning("Demo files not found on disk. Generating dynamically...")
+            from src.synthetic_generator import generate_baseline_dataset, generate_current_dataset
+            reference_df = generate_baseline_dataset(500, seed=42)
+            current_df, _ = generate_current_dataset(500, seed=101)
+            st.success("✅ Synthetic benchmark generated successfully in-memory.")
+
+    else:
+        # Custom File Uploads (Front & Center in two columns)
+        u_col1, u_col2 = st.columns(2)
+
+        with u_col1:
+            st.markdown("#### 1. Target Dataset (Required)")
+            cur_uploader = st.file_uploader(
+                "Upload Current Production Data (.csv, .xlsx)",
+                type=["csv", "xlsx"],
+                key="main_cur_upload",
+                help="Accepts CSV or modern Excel workbooks (.xlsx).",
+            )
+            if cur_uploader is not None:
+                cur_name = cur_uploader.name
+                cur_bytes = cur_uploader.getvalue()
+                if cur_name.lower().endswith(".xlsx"):
+                    sheets = list_excel_sheets(cur_bytes)
+                    cur_sheet = st.selectbox("Select Target Worksheet", sheets, key="main_cur_sheet")
+                    current_df = read_excel_bytes(cur_bytes, sheet_name=cur_sheet)
+                else:
+                    current_df = read_csv_bytes(cur_bytes)
+                st.info(f"Loaded: `{cur_name}` ({len(current_df)} rows, {current_df.shape[1]} columns)")
+
+        with u_col2:
+            st.markdown("#### 2. Baseline Dataset (Optional)")
+            st.caption("Required for distribution and schema drift testing.")
+            ref_uploader = st.file_uploader(
+                "Upload Reference Baseline Data (.csv, .xlsx)",
+                type=["csv", "xlsx"],
+                key="main_ref_upload",
+                help="Historical or clean training batch to compare distributions against.",
+            )
+            if ref_uploader is not None:
+                ref_name = ref_uploader.name
+                ref_bytes = ref_uploader.getvalue()
+                if ref_name.lower().endswith(".xlsx"):
+                    r_sheets = list_excel_sheets(ref_bytes)
+                    ref_sheet = st.selectbox("Select Baseline Worksheet", r_sheets, key="main_ref_sheet")
+                    reference_df = read_excel_bytes(ref_bytes, sheet_name=ref_sheet)
+                else:
+                    reference_df = read_csv_bytes(ref_bytes)
+                st.info(f"Loaded Baseline: `{ref_name}` ({len(reference_df)} rows, {reference_df.shape[1]} columns)")
+            else:
+                ref_name = None
+
+    dataset_info = {
+        "current_name": cur_name,
+        "reference_name": ref_name,
+        "current_sheet": cur_sheet,
+        "reference_sheet": ref_sheet,
+    }
+
+    return current_df, reference_df, dataset_info
+
+
+# ==============================================================================
+# MAIN PAGE LIFECYCLE
+# ==============================================================================
+
+def main() -> None:
+    """Main application lifecycle and view routing."""
+    # 1. Render Sidebar (Branding, Logos, Themes & Parameters)
+    branding_params = render_sidebar_controls()
+
+    # 2. Inject Dynamic CSS Palette
+    st.markdown(generate_custom_css(branding_params["selected_theme"]), unsafe_allow_html=True)
+
+    # 3. Main Hero Banner
+    st.markdown(
+        f"""
+        <div class="hero-banner">
+            <div class="hero-title">{branding_params['selected_logo']} {branding_params['app_title']}</div>
+            <div class="hero-subtitle">{branding_params['app_subtitle']}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # 4. Quick Workflow Stepper (Collapsible Guide)
+    with st.expander("💡 Quick Workflow Stepper (Click to expand guide)", expanded=False):
         st.markdown(
             """
             <div style="margin-bottom: 8px;">
-                <span class="step-pill">1️⃣ Ingestion</span>
+                <span class="step-pill">1️⃣ Ingest Data</span>
                 <span class="step-pill">2️⃣ Executive Health</span>
                 <span class="step-pill">3️⃣ Pandera Validation</span>
                 <span class="step-pill">4️⃣ Drift Testing</span>
@@ -581,16 +634,19 @@ def main() -> None:
             unsafe_allow_html=True,
         )
 
+    # 5. Front-and-Center Ingestion Hub
+    current_df, reference_df, ds_info = render_main_ingestion_hub(branding_params["selected_theme"])
+
     if current_df is None:
-        st.info("👋 Welcome! Please upload a dataset in the sidebar or select **'Load Synthetic Demo Benchmark'** to begin.")
+        st.warning("👆 Please upload a target dataset above or choose the Instant Demo Benchmark to proceed.")
         return
 
-    # Trigger or retrieve cached analysis bundle
+    # 6. Trigger or retrieve cached analysis bundle
     bundle_key = (
-        f"{params['app_title']}_{params['current_name']}_{params['current_sheet']}_"
-        f"{params['reference_name']}_{params['reference_sheet']}_"
-        f"{params['alpha']}_{params['contamination']}_"
-        f"{params['weights']['completeness']}_{params['weights']['uniqueness']}_{params['weights']['validity']}"
+        f"{branding_params['app_title']}_{ds_info['current_name']}_{ds_info['current_sheet']}_"
+        f"{ds_info['reference_name']}_{ds_info['reference_sheet']}_"
+        f"{branding_params['alpha']}_{branding_params['contamination']}_"
+        f"{branding_params['weights']['completeness']}_{branding_params['weights']['uniqueness']}_{branding_params['weights']['validity']}"
     )
 
     if "last_bundle_key" not in st.session_state or st.session_state["last_bundle_key"] != bundle_key:
@@ -598,15 +654,15 @@ def main() -> None:
             bundle = run_analysis_pipeline(
                 current_df=current_df,
                 reference_df=reference_df,
-                weights=params["weights"],
-                alpha=params["alpha"],
-                contamination=params["contamination"],
-                current_name=params["current_name"],
-                reference_name=params["reference_name"],
-                current_sheet=params["current_sheet"],
-                reference_sheet=params["reference_sheet"],
-                app_title=params["app_title"],
-                app_subtitle=params["app_subtitle"],
+                weights=branding_params["weights"],
+                alpha=branding_params["alpha"],
+                contamination=branding_params["contamination"],
+                current_name=ds_info["current_name"],
+                reference_name=ds_info["reference_name"],
+                current_sheet=ds_info["current_sheet"],
+                reference_sheet=ds_info["reference_sheet"],
+                app_title=branding_params["app_title"],
+                app_subtitle=branding_params["app_subtitle"],
             )
             st.session_state["bundle"] = bundle
             st.session_state["last_bundle_key"] = bundle_key
@@ -714,7 +770,7 @@ def main() -> None:
             else:
                 st.markdown(
                     "**Distribution Drift:** <span class='status-badge-orange'>NO BASELINE SUPPLIED</span> "
-                    "(Upload reference dataset to compare distributions)",
+                    "(Upload reference dataset in the Ingestion Hub to compare distributions)",
                     unsafe_allow_html=True,
                 )
         with s_c2:
@@ -798,7 +854,7 @@ def main() -> None:
             )
 
             if val.issues:
-                # Severity and Column Search Filters (User-Friendly Control)
+                # Severity and Column Search Filters (User-Friendly Controls)
                 f_c1, f_c2 = st.columns([1, 2])
                 with f_c1:
                     sev_filter = st.selectbox("Filter by Severity", ["ALL", "CRITICAL", "ERROR", "WARNING"])
@@ -849,8 +905,8 @@ def main() -> None:
         if drift is None or not drift.has_reference:
             st.warning("⚠️ **Drift Detection Skipped:** No reference baseline dataset was provided.")
             st.info(
-                "To evaluate distribution and schema drift, please upload a baseline reference dataset "
-                "in the sidebar or select **'Load Synthetic Demo Benchmark'**."
+                "To evaluate distribution and schema drift, upload a baseline reference dataset "
+                "in the **Dataset Ingestion Hub** above or select the **Instant Demo Benchmark**."
             )
         else:
             v_color = "red" if drift.dataset_drift_detected else "green"
@@ -864,7 +920,7 @@ def main() -> None:
                 f"columns shifted significantly (exceeding threshold α = {drift.column_drift[list(drift.column_drift.keys())[0]].threshold_alpha if drift.column_drift else 0.05})."
             )
 
-            # Schema Changes (Robust Access via getattr)
+            # Schema Changes (Defensive lookup using getattr)
             sd = drift.schema_diff
             has_changes = getattr(sd, "has_schema_changes", getattr(sd, "schema_has_drift", False))
             missing_cols = getattr(sd, "missing_columns", [])
@@ -969,7 +1025,7 @@ def main() -> None:
             else:
                 st.info("At least two numerical features are required for 2D scatter visualization.")
 
-            # Filter Anomalies by Score Threshold (User-Friendly Feature)
+            # Filter Anomalies by Score Threshold
             st.markdown("#### Candidate Suspicious Records Ranked by Suspicion Score")
             min_score = st.slider(
                 "Filter records by Minimum Suspicion Score",
@@ -1017,7 +1073,7 @@ def main() -> None:
         st.subheader("Multi-Format Audit Export Center")
         st.markdown(
             "Download publication-grade academic and industrial audit reports compiled in-memory. "
-            "Your chosen app branding and subtitle will be embedded directly in the downloaded reports."
+            "Your chosen app branding and subtitle are dynamically embedded into the report headers."
         )
 
         st.markdown("---")
@@ -1033,7 +1089,7 @@ def main() -> None:
             try:
                 pdf_bytes = export_analysis_to_pdf(profile, dqs, val, drift, anom, meta)
                 st.download_button(
-                    label=f"⬇️ Download {params['app_title']} PDF Report",
+                    label=f"⬇️ Download {branding_params['app_title']} PDF Report",
                     data=pdf_bytes,
                     file_name=f"audit_report_{meta.dataset_name}.pdf",
                     mime="application/pdf",
